@@ -1,12 +1,12 @@
-package com.seven.daily;
+package com.seven.diary;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DailyApplication {
+public class DiaryApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DailyApplication.class, args);
+        SpringApplication.run(DiaryApplication.class, args);
     }
 }
