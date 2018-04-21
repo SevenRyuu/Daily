@@ -18,4 +18,10 @@ public class LoginController {
 
         return "index";
     }
+
+    @RequestMapping("/register")
+    public String register(){
+
+        return "index";
+    }
 }
