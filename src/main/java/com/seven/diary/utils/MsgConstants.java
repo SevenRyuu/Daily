@@ -28,4 +28,20 @@ public class MsgConstants {
     public static String errorRequestParam(){
         return "请求参数错误！";
     }
+
+    /**
+     * code 88
+     * @return
+     */
+    public static String existedUser(){
+        return "该用户已注册！";
+    }
+
+    /**
+     * code 87
+     * @return
+     */
+    public static String errorPassword(){
+        return "密码错误！";
+    }
 }

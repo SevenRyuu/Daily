@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userDao.findUserByEmail(email);
-        if(user == null){
+        if(null == user){
         		throw new UsernameNotFoundException("未查询到用户信息");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),

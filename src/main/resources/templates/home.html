@@ -19,16 +19,18 @@ $(document).ready(function(){
 	$("#toRegister").click(function(){
 		if(checkRegister()){			
 			var data={};
+			data.email =$("#r_email").val();
 			data.username =$("#r_username").val();
 			data.password =$("#r_password").val();
 			data.role =$("#r_role").val();
 			var url="/register";
 			$.post(url,data,function(data){
-				if(data.result){				
+				if("00" == data.code){
 					alert("注册成功");
 					window.location.href = "/login";
 				}else{
-					alert("用户名已存在");
+				    console.log("code: " + data.code + " , message: " + data.returnMsg)
+					alert(data.returnMsg);
 					return;
 				}
 			})
@@ -37,11 +39,11 @@ $(document).ready(function(){
 });
 
 function checkLogin(){
-	
-	if($("#l_username").val() == null || $("#l_username").val() == ""){
-		$("#error").html("用户名不能为空");
-		return false;
-	}
+
+    if($("#r_email").val() == null || $("#r_email").val() == ""){
+        $("#error").html("邮件地址不能为空");
+        return false;
+    }
 	if($("#l_password").val() == null || $("#l_password").val() == ""){
 		$("#error").html("密码不能为空");
 		return false;
@@ -50,7 +52,11 @@ function checkLogin(){
 }
 
 function checkRegister(){
-	
+
+    if($("#r_email").val() == null || $("#r_email").val() == ""){
+        $("#error").html("邮件地址不能为空");
+        return false;
+    }
 	if($("#r_username").val() == null || $("#r_username").val() == ""){
 		$("#error").html("用户名不能为空");
 		return false;
@@ -140,8 +146,8 @@ function checkRegister(){
 				<form id="l_form" th:action="@{/login}" method="post" onsubmit="return checkLogin()">
 					<div class="modal-body">
 						<div class="form-group">
-						<label>Name :</label>
-						<input type="text" id="l_username" name="username" class="form-control" placeholder="请输入您的账号" />
+						<label>Email :</label>
+						<input type="text" id="l_email" name="email" class="form-control" placeholder="请输入您的邮件地址" />
 						</div>
 						<div class="form-group">
 						<label>Password :</label>
@@ -169,6 +175,10 @@ function checkRegister(){
 				</div>
 				<form id="r_form" method="post">
 					<div class="modal-body">
+						<div class="form-group">
+						<label>Email :</label>
+						<input  type="text" id="r_email" name="email" class="form-control" placeholder="请输入您的邮件地址" />
+						</div>
 						<div class="form-group">
 						<label>Name :</label>
 						<input  type="text" id="r_username" name="username" class="form-control" placeholder="请输入您的账号" />
