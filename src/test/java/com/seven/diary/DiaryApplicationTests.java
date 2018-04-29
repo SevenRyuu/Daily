@@ -1,5 +1,7 @@
 package com.seven.diary;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.seven.diary.dao.UserDao;
 import com.seven.diary.model.Role;
 import com.seven.diary.model.User;
@@ -9,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,12 +25,7 @@ public class DiaryApplicationTests {
     }
 
     @Test
-    public void testBegin(){
-        //userDao.insert("954585508@qq.com","seven", "1234567", "SEVEN", new Date());
-        //User user = userDao.findUserByEmail("954585508@qq.com");
-//        User user = userDao.findTestValueByEmail("954585508@qq.com");
-//        System.out.println(user);
-        //User user = userDao.findUserByEmail(null);
+    public void testBegin() {
         User user = new User();
         user.setEmail("test@qq.com");
         user.setUsername("name");
@@ -38,5 +35,19 @@ public class DiaryApplicationTests {
         userDao.saveUser(user);
         System.out.println(user);
     }
+
+    @Test
+    public void testPage() {
+        PageHelper.startPage(1, 3);
+        List<User> a = userDao.findAll();
+        PageInfo<User> pageInfo = new PageInfo<User>(a);
+
+        //System.out.println((List<User>)pageInfo.getList());
+        pageInfo.getList().forEach(p->{
+            System.out.println(p);
+        });
+        //System.out.println(pageInfo);
+    }
+
 
 }
